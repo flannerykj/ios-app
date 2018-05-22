@@ -20,7 +20,8 @@ class PostTableViewController: UITableViewController {
         
         let post1 = Post(title: "Hello World Post", user: user1, body: "Lorem ipsum text", category: "History", datePublished: Date(), image: photo1!)
         let post2 = Post(title: "Second Post", user: user1, body: "jhhddrtgghjj text", category: "Science", datePublished: Date(), image: photo2!)
-        posts += [post1, post2]
+        let post3 = Post(title: "Third Post", user: user1, body: "jhhddrtgghjj text", category: "Science", datePublished: Date(), image: photo1!)
+        posts += [post1, post2, post3]
     }
 
     // MARK: - Table view data source
@@ -39,16 +40,32 @@ class PostTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
             fatalError("table cell is not of type PostTableViewCell")
         }
+        
         let post = posts[indexPath.row]
         cell.titleLabel.text = post.title
+        
+        // cell.coverPhotoView?.frame = CGRect(x: 0, y: 0, width: 200, height: 100)
+        
+        cell.coverPhotoView?.contentMode = UIViewContentMode.scaleAspectFill
         cell.coverPhotoView?.image = post.image
+        
         cell.bodyLabel.text = post.body
         cell.usernameLabel.text = post.user.username
         cell.dateLabel.text = post.datePublished.description
-        
+
         return cell
     }
-
+    
+    // MARK: Actions
+    @IBAction func unwintoPostList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? PostViewController, let post = sourceViewController.post {
+            // Add a new meal.
+            let newIndexPath = IndexPath(row: posts.count, section: 0)
+            posts.append(post)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
