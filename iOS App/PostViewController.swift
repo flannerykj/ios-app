@@ -18,12 +18,25 @@ class PostViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddPostMode = presentingViewController is UINavigationController
+        if (isPresentingInAddPostMode) {
+            dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
+        } else {
+            fatalError("The MealViewController is not inside a navigation controller.")
+        }
+    }
+    
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var bodyTextView: UITextView!
+
+    @IBOutlet weak var bodyTextField: UITextField!
+    
     @IBOutlet weak var photoImageView: UIImageView!
     
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
-        print("trying to select")
         titleTextField.resignFirstResponder()
         // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
@@ -39,6 +52,7 @@ class PostViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         dismiss(animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("ok")
         // The info dictionary may contain multiple representations of the image. You want to use the original.
         guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
@@ -59,7 +73,7 @@ class PostViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             return
         }
         let titleText = titleTextField.text ?? ""
-        let bodyText = titleTextField.text ?? ""
+        let bodyText = bodyTextField.text ?? ""
         let photo = photoImageView.image
         let user1 =  User(username: "flannerykj", email: "flannj@gmail.com")
         post = Post(title: titleText, user: user1, body: bodyText, category: "photography", datePublished: Date.init(), image: photo!)
@@ -73,7 +87,13 @@ class PostViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        titleTextField.delegate = self
+        if let post = post {
+            navigationItem.title = post.title
+            titleTextField.text   = post.title
+            photoImageView.image = post.image
+            bodyTextField.text = post.body
+        }
     }
 
 }

@@ -5,14 +5,13 @@
 //  Created by Flannery Jefferson on 2018-03-24.
 //  Copyright © 2018 Flannery Jefferson. All rights reserved.
 //
-
+import os.log
 import UIKit
 
 class PostTableViewController: UITableViewController {
     var posts = [Post]()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    
+    func loadSamplePosts() {
         let user1 =  User(username: "flannerykj", email: "flannj@gmail.com")
         
         let photo1 = UIImage(named: "fruit.jpeg")
@@ -22,6 +21,12 @@ class PostTableViewController: UITableViewController {
         let post2 = Post(title: "Second Post", user: user1, body: "jhhddrtgghjj text", category: "Science", datePublished: Date(), image: photo2!)
         let post3 = Post(title: "Third Post", user: user1, body: "jhhddrtgghjj text", category: "Science", datePublished: Date(), image: photo1!)
         posts += [post1, post2, post3]
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.leftBarButtonItem = editButtonItem
+        loadSamplePosts()
     }
 
     // MARK: - Table view data source
@@ -58,34 +63,40 @@ class PostTableViewController: UITableViewController {
     
     // MARK: Actions
     @IBAction func unwintoPostList(sender: UIStoryboardSegue) {
+        
+
         if let sourceViewController = sender.source as? PostViewController, let post = sourceViewController.post {
-            // Add a new meal.
-            let newIndexPath = IndexPath(row: posts.count, section: 0)
-            posts.append(post)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                posts[selectedIndexPath.row] = post
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            } else {
+                // Add a new post.
+                let newIndexPath = IndexPath(row: posts.count, section: 0)
+                posts.append(post)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
         
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            posts.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
@@ -102,14 +113,34 @@ class PostTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+        case "AddPost":
+            print("adding new")
+        case "ShowDetail":  
+            print("showing detail")
+            guard let postDetailViewController = segue.destination as? PostViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedPostCell = sender as? PostTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedPostCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedPost = posts[indexPath.row]
+            postDetailViewController.post = selectedPost
+        default:
+            print("didn't work")
+        }
     }
-    */
 
 }

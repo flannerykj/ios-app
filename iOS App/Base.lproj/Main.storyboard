@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rGP-Wz-PP1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rGP-Wz-PP1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -77,6 +77,7 @@
                                     <outlet property="dateLabel" destination="yDN-6H-jrG" id="mUk-lc-Ul9"/>
                                     <outlet property="titleLabel" destination="Lm2-Dq-5Lh" id="LPn-vg-DwU"/>
                                     <outlet property="usernameLabel" destination="NPl-rO-rRE" id="afE-RQ-Hle"/>
+                                    <segue destination="qsA-k6-HCx" kind="show" identifier="ShowDetail" id="9Kx-Vd-U0v"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -88,7 +89,7 @@
                     <navigationItem key="navigationItem" title="Posts" id="Eri-7D-Ego">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vgO-gY-4Bt">
                             <connections>
-                                <segue destination="HrV-V4-Z4E" kind="show" id="QIu-dJ-uTd"/>
+                                <segue destination="HrV-V4-Z4E" kind="show" identifier="AddPost" id="QIu-dJ-uTd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -115,30 +116,33 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter post title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gsf-gE-0hb">
-                                        <rect key="frame" x="0.0" y="32.5" width="351" height="87.5"/>
+                                        <rect key="frame" x="0.0" y="32.5" width="351" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="qFi-1p-ztx"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sld-YX-0rb">
-                                        <rect key="frame" x="0.0" y="132" width="73.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="94.5" width="73.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" translatesAutoresizingMaskIntoConstraints="NO" id="FeU-tI-WTS">
-                                        <rect key="frame" x="0.0" y="164.5" width="347" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tM1-6f-LIV">
+                                        <rect key="frame" x="0.0" y="127" width="351" height="87.5"/>
+                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsR-pP-2Mz">
                                         <rect key="frame" x="0.0" y="226.5" width="132.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="228" image="defaultphoto_2x" translatesAutoresizingMaskIntoConstraints="NO" id="x0R-fU-Szq">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="228" image="defaultphoto_2x" translatesAutoresizingMaskIntoConstraints="NO" id="x0R-fU-Szq">
                                         <rect key="frame" x="0.0" y="259" width="320" height="320"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -147,13 +151,16 @@
                                             <constraint firstAttribute="width" secondItem="x0R-fU-Szq" secondAttribute="height" multiplier="1:1" id="PjY-1l-JPG"/>
                                         </constraints>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="UgV-hP-Sny" appends="YES" id="oG1-En-Xdn"/>
+                                            <outletCollection property="gestureRecognizers" destination="ASq-Jm-qPS" appends="YES" id="UEg-x9-t74"/>
                                         </connections>
                                     </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tM1-6f-LIV" secondAttribute="trailing" id="2Co-HH-Z25"/>
+                                    <constraint firstItem="tM1-6f-LIV" firstAttribute="leading" secondItem="3xL-ZX-D1P" secondAttribute="leading" id="EN3-rp-RMF"/>
                                     <constraint firstItem="gsf-gE-0hb" firstAttribute="leading" secondItem="3xL-ZX-D1P" secondAttribute="leading" id="K5s-XQ-sbo"/>
                                     <constraint firstAttribute="trailing" secondItem="gsf-gE-0hb" secondAttribute="trailing" id="ZSt-Hz-zYR"/>
+                                    <constraint firstItem="gsf-gE-0hb" firstAttribute="top" secondItem="AwN-Fw-QN7" secondAttribute="bottom" constant="30" id="pyR-yi-wbb"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -167,7 +174,11 @@
                         <viewLayoutGuide key="safeArea" id="KDH-G3-Y7x"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Post" id="qZt-1o-ld0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UpO-My-ENF"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UpO-My-ENF">
+                            <connections>
+                                <action selector="cancel:" destination="qsA-k6-HCx" id="0dZ-Ex-3qc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="M3M-2D-y4z">
                             <connections>
                                 <action selector="saveNewPost:" destination="qsA-k6-HCx" id="fY8-h9-Vhm"/>
@@ -176,7 +187,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bodyTextView" destination="FeU-tI-WTS" id="zb2-OF-mDG"/>
+                        <outlet property="bodyTextField" destination="tM1-6f-LIV" id="8Ad-V1-3WZ"/>
                         <outlet property="photoImageView" destination="x0R-fU-Szq" id="REb-eF-aFb"/>
                         <outlet property="saveButton" destination="M3M-2D-y4z" id="aWA-7k-n24"/>
                         <outlet property="titleTextField" destination="gsf-gE-0hb" id="xwx-fQ-ohS"/>
@@ -184,9 +195,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoY-vt-FlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TzX-yw-cZz" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="UgV-hP-Sny">
+                <tapGestureRecognizer id="ASq-Jm-qPS">
                     <connections>
-                        <action selector="selectImageFromPhotoLibrary:" destination="qsA-k6-HCx" id="5Xt-sj-d84"/>
+                        <action selector="selectImageFromPhotoLibrary:" destination="qsA-k6-HCx" id="oze-Cr-ndg"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -226,10 +237,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fE7-dk-rRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="42.278860569715143"/>
+            <point key="canvasLocation" x="735" y="817"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultphoto_2x" width="320" height="320"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="9Kx-Vd-U0v"/>
+    </inferredMetricsTieBreakers>
 </document>
