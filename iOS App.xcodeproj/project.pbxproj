@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		95149A1B20F0239D00CCFE4E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95149A1A20F0239C00CCFE4E /* ProfileViewController.swift */; };
 		958DA6DA2066BED10062A6D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958DA6D92066BED10062A6D2 /* AppDelegate.swift */; };
 		958DA6DF2066BED10062A6D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958DA6DD2066BED10062A6D2 /* Main.storyboard */; };
 		958DA6E12066BED10062A6D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958DA6E02066BED10062A6D2 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		95149A1A20F0239C00CCFE4E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		958DA6D62066BED10062A6D2 /* iOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		958DA6D92066BED10062A6D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		958DA6DE2066BED10062A6D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				958DA6D92066BED10062A6D2 /* AppDelegate.swift */,
+				95149A1A20F0239C00CCFE4E /* ProfileViewController.swift */,
 				958DA6DD2066BED10062A6D2 /* Main.storyboard */,
 				958DA70D2066C5FE0062A6D2 /* PostTableViewCell.swift */,
 				958DA70F2066F9FB0062A6D2 /* PostViewController.swift */,
@@ -275,6 +278,7 @@
 				958DA70C2066C1D20062A6D2 /* User.swift in Sources */,
 				958DA70A2066BF8B0062A6D2 /* Post.swift in Sources */,
 				958DA70E2066C5FE0062A6D2 /* PostTableViewCell.swift in Sources */,
+				95149A1B20F0239D00CCFE4E /* ProfileViewController.swift in Sources */,
 				958DA6DA2066BED10062A6D2 /* AppDelegate.swift in Sources */,
 				958DA7082066BF400062A6D2 /* PostTableViewController.swift in Sources */,
 			);
